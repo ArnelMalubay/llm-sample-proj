@@ -1,37 +1,63 @@
-from groq import Groq
 from dotenv import load_dotenv
+from groq import Groq
+import os
 
 load_dotenv()
 
-client = Groq()
+client = Groq(api_key = os.getenv("GROQ_API_KEY"))
 
-system_prompt = """
-You are a helpful IT support chatbot for 'Tech Solutions'.
-Your role is to assist employees with common IT issues, provide guidance on using company software, and help troubleshoot basic technical problems.
-Respond clearly and patiently. If an issue is complex, explain that you will create a support ticket for a human technician.
-Keep responses brief and ask a maximum of one question at a time.
-"""
 
-chat_completion = client.chat.completions.create(
+stream = client.chat.completions.create(
+    #
+    # Required parameters
+    #
     messages=[
+        # Set an optional system message. This sets the behavior of the
+        # assistant and can be used to provide specific instructions for
+        # how it should behave throughout the conversation.
         {
             "role": "system",
-            "content": system_prompt,
+            "content": "You are a helpful assistant."
         },
+        # Set a user message for the assistant to respond to.
         {
             "role": "user",
-            "content": "My monitor isn't turning on.",
-        },
-        {
-            "role": "assistant",
-            "content": "Let's try to troubleshoot. Is the monitor properly plugged into a power source?",
-        },
-        {
-            "role": "user",
-            "content": "Yes, it's plugged in."
+            "content": "Explain the importance of fast language models",
         }
     ],
+
+    # The language model which will generate the completion.
     model="llama-3.3-70b-versatile",
+
+    #
+    # Optional parameters
+    #
+
+    # Controls randomness: lowering results in less random completions.
+    # As the temperature approaches zero, the model will become deterministic
+    # and repetitive.
+    temperature=0.5,
+
+    # The maximum number of tokens to generate. Requests can use up to
+    # 2048 tokens shared between prompt and completion.
+    max_completion_tokens=1024,
+
+    # Controls diversity via nucleus sampling: 0.5 means half of all
+    # likelihood-weighted options are considered.
+    top_p=1,
+
+    # A stop sequence is a predefined or user-specified text string that
+    # signals an AI to stop generating content, ensuring its responses
+    # remain focused and concise. Examples include punctuation marks and
+    # markers like "[end]".
+    stop=None,
+
+    # If set, partial message deltas will be sent.
+    stream=True,
 )
 
-print(chat_completion.choices[0].message.content)
+# Print the incremental deltas returned by the LLM.
+# for chunk in stream:
+#     print(chunk.choices[0].delta.content, end="")
+
+print(stream)
