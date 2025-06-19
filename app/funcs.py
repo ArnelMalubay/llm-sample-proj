@@ -22,12 +22,12 @@ stream = client.chat.completions.create(
         # Set a user message for the assistant to respond to.
         {
             "role": "user",
-            "content": "Explain the importance of fast language models",
+            "content": "Can you search the web for the weather in Pasig, Metro Manila, Philippines?",
         }
     ],
 
     # The language model which will generate the completion.
-    model="llama-3.3-70b-versatile",
+    model="llama-3.1-8b-instant",
 
     #
     # Optional parameters
@@ -57,7 +57,5 @@ stream = client.chat.completions.create(
 )
 
 # Print the incremental deltas returned by the LLM.
-# for chunk in stream:
-#     print(chunk.choices[0].delta.content, end="")
-
-print(stream)
+for chunk in stream:
+    print(chunk.choices[0].delta.content, end="")
