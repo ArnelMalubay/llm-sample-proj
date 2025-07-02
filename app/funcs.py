@@ -1,12 +1,18 @@
+# This file contains the functions that are used to extract the text from the PDF and chat with the PDF
+
+# Importing the necessary libraries
 from dotenv import load_dotenv
 from groq import Groq
 import os
 import PyPDF2
 
+# Loading the environment variables
 load_dotenv()
 
+# Initializing the Groq client
 client = Groq(api_key = os.getenv("GROQ_API_KEY"))
 
+# Function to extract the text from the PDF
 def extract_pdf_text(pdf_file):
     reader = PyPDF2.PdfReader(pdf_file)
     text = ""
@@ -14,7 +20,8 @@ def extract_pdf_text(pdf_file):
         text += page.extract_text() or ""
     return text
 
-def chat_with_pdf(user_message, pdf_text=None):
+# Function to chat with the PDF
+def chat_with_pdf(user_message, pdf_text = None):
     if pdf_text:
         prompt = f"The user uploaded a scientific paper. Here is the content of the paper:\n{pdf_text}\n\nUser question: {user_message}"
     else:

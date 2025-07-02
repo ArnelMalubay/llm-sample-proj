@@ -4,6 +4,7 @@
 import gradio as gr
 from funcs import extract_pdf_text, chat_with_pdf
 
+# Initializing the initial messages
 initial_messages = [
     {
         "role": "system",
@@ -15,14 +16,17 @@ initial_messages = [
     }
 ]
 
-def pdf_chat_interface(message, history, files=None):
+# Function to handle the chat interface
+def pdf_chat_interface(message, history, files = None):
+    # Extracting the text from the PDF
     pdf_text = None
     if files and len(files) > 0:
         pdf_file = files[0]
         pdf_text = extract_pdf_text(pdf_file)
-    user_message = message["content"] if isinstance(message, dict) else message
+    user_message = message
     return chat_with_pdf(user_message, pdf_text)
 
+# Initializing the Gradio interface
 demo = gr.ChatInterface(
     fn = pdf_chat_interface,
     type = "messages",
