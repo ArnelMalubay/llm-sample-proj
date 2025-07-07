@@ -1,98 +1,152 @@
-# PDF Chat Interface
+# Personal Assistant Chatbot
 
-A Gradio-based web application that allows users to upload PDF files and ask questions about their content using an AI-powered chat interface.
+A modern AI-powered personal assistant built with Gradio and Groq API, featuring real-time streaming responses for natural conversations.
 
 ## Features
 
-- Upload PDF files through a user-friendly web interface
-- Ask questions about the uploaded PDF content
-- AI-powered responses using Groq's LLM
-- Clean, modern chat interface built with Gradio
+- 🤖 **AI-Powered Assistant**: Uses Groq's lightning-fast LLM (llama-3.1-8b-instant) for intelligent responses
+- 💬 **Streaming Chat**: Real-time response streaming for natural conversation flow
+- 🌐 **Web Interface**: Clean, modern chat interface built with Gradio ChatInterface
+- 🐳 **Docker Ready**: Containerized for easy deployment and scalability
 
 ## Prerequisites
 
-- Python 3.9 or higher
+- Python 3.9+ 
 - Docker (optional, for containerized deployment)
-- Groq API key
+- Groq API key ([Get one here](https://console.groq.com/))
 
-## Setup
+## Quick Start
 
 ### 1. Clone the repository
 ```bash
 git clone <repository-url>
-cd tbd
+cd sample-personal-assistant-chatbot
 ```
 
-### 2. Install dependencies
-```bash
-cd app
-pip install -r requirements.txt
-```
-
-### 3. Configure environment variables
+### 2. Set up environment variables
 Create a `.env` file in the project root:
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-### 4. Run the application
+### 3. Run with Python
 ```bash
+cd app
+pip install -r requirements.txt
 python app.py
 ```
 
-The application will be available at `http://localhost:7860`
-
-## Docker Deployment
-
-### Build the Docker image
+### 4. Run with Docker
 ```bash
-docker build -t pdf-chat-app .
-```
+# Build the image
+docker build -t personal-assistant-chatbot:latest .
 
-### Run the container
-```bash
-docker run -p 7860:7860 --env-file .env pdf-chat-app
+# Run the container
+docker run -p 7860:7860 --env-file .env personal-assistant-chatbot:latest
 ```
 
 The application will be available at `http://localhost:7860`
 
 ## Usage
 
-1. Open the web interface in your browser
-2. Upload a PDF file using the file upload button
-3. Type your question about the PDF content in the chat box
-4. Receive AI-powered responses based on the PDF content
+1. Open your browser and navigate to `http://localhost:7860`
+2. Start chatting with your AI assistant
+3. Try the example prompts or ask any general questions
+4. Enjoy real-time streaming responses!
+
+### Example Interactions
+
+- "Help me write a professional email"
+- "Explain quantum physics in simple terms" 
+- "Give me some productivity tips"
+- "What are some healthy breakfast ideas?"
 
 ## Project Structure
 
 ```
-tbd/
+sample-personal-assistant-chatbot/
 ├── app/
-│   ├── app.py          # Gradio interface
-│   ├── funcs.py        # PDF processing and chat logic
+│   ├── app.py           # Main Gradio application
+│   ├── funcs.py         # Chat logic and Groq API integration
 │   └── requirements.txt # Python dependencies
-├── Dockerfile          # Docker configuration
-├── .env               # Environment variables (create this)
-├── .gitignore         # Git ignore rules
-└── README.md          # This file
+├── Dockerfile           # Docker configuration
+├── .dockerignore       # Docker ignore rules
+├── .env                # Environment variables (create this)
+├── gitignore           # Git ignore rules
+└── README.md           # This file
+```
+
+## Configuration
+
+### Environment Variables
+
+- `GROQ_API_KEY`: Your Groq API key (required)
+
+### Customization
+
+You can customize the assistant by modifying the `SYSTEM_MESSAGE` in `app/funcs.py`:
+
+```python
+SYSTEM_MESSAGE = "Your custom system prompt here..."
 ```
 
 ## API Configuration
 
-This application uses the Groq API for AI responses. You'll need to:
+This application uses the Groq API for ultra-fast AI responses:
 
-1. Sign up for a Groq account at https://console.groq.com/
-2. Generate an API key
-3. Add the API key to your `.env` file
+1. **Sign up**: Create account at [console.groq.com](https://console.groq.com/)
+2. **API Key**: Generate your API key from the console
+3. **Environment**: Add `GROQ_API_KEY=your_key_here` to your `.env` file
 
 ## Dependencies
 
-- `gradio==5.34.1` - Web interface framework
-- `groq==0.28.0` - Groq API client
-- `PyPDF2==3.0.1` - PDF text extraction
-- `transformers==4.52.4` - Machine learning utilities
-- `dotenv==0.9.9` - Environment variable management
+- `gradio==5.33.0` - Modern web interface framework
+- `groq==0.28.0` - Groq API client for fast LLM inference
+- `python-dotenv==1.0.0` - Environment variable management
+
+## Development
+
+### Running in Development Mode
+
+For faster development with auto-reload:
+
+```bash
+cd app
+gradio app.py
+```
+
+This enables hot-reload when you make changes to your code.
+
+### Docker Development
+
+```bash
+# Build and run in one command
+docker build -t personal-assistant-chatbot:latest . && docker run -p 7860:7860 --env-file .env personal-assistant-chatbot:latest
+```
+
+## Deployment Options
+
+- **Local**: Run directly with Python
+- **Docker**: Use provided Dockerfile for containerized deployment
+- **Cloud**: Deploy to any cloud platform supporting Docker containers
+- **HuggingFace Spaces**: Use `gradio deploy` for easy cloud deployment
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
 
 This project is open source and available under the MIT License.
+
+## Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Gradio documentation](https://gradio.app/)
+2. Review the [Groq API docs](https://console.groq.com/docs/)
+3. Open an issue in this repository
