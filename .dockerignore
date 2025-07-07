@@ -1,0 +1,45 @@
+# Python runtime files
+app/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+llm_proj_env/
+venv/
+env/
+ENV/
+*.venv
+
+# Environment files
+.env
+.env.*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+
+# Gradio cache
+.gradio/
+
+# Logs
+*.log
+
+# Documentation (not needed in container)
+README.md
+
+# Docker files (don't copy into container)
+Dockerfile
+.dockerignore
+
+# Git ignore file (not needed in container)
+gitignore
