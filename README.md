@@ -1,6 +1,6 @@
 # Personal Assistant Chatbot
 
-A modern AI-powered personal assistant built with Gradio and Groq API, featuring real-time streaming responses for natural conversations.
+A modern AI-powered personal assistant built with Gradio and Groq API, featuring real-time streaming responses for natural conversations. 
 
 ## Features
 
@@ -53,6 +53,9 @@ The application will be available at `http://localhost:7860`
 2. Start chatting with your AI assistant
 3. Try the example prompts or ask any general questions
 4. Enjoy real-time streaming responses!
+
+## Access via HuggingFace spaces
+You can also access a hosted version of this app in Huggingface Spaces via this ([link](https://huggingface.co/spaces/arnel8888/sample-personal-assistant-chatbot)). 
 
 ### Example Interactions
 
